@@ -1,8 +1,7 @@
 import React from 'react'
-import {Text} from 'react-native'
-import HomeScreen from './src/screens/HomeScreen'
+import Router from './src/routes/Router'
 export default function App(){
   return(
-   <HomeScreen/>
+   <Router/>
   )
 }
