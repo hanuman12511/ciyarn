@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Text,View,StyleSheet,Image,Dimensions} from 'react-native'
 import home from "../images/icon/home.png"
 import cart from '../images/icon/cart.png'
@@ -6,13 +6,15 @@ import notification from '../images/icon/notification.png'
 const w =Dimensions.get('window').width;
 const h =Dimensions.get('window').height;
 
-export default function HeadderComponent(){
+export default function HeadderComponent(props){
+ 
+   
     return(
         <View style={styles.header}>
         <View style={styles.header_left}>
-            <Image source={home} style={styles.home_icon}/>
+            <Image source={props.iconl} style={styles.home_icon}/>
             <Text style={styles.home_text}>
-               Ciya
+               {props.title}
              </Text>
         </View>
         <View style={styles.header_right}>
@@ -38,22 +40,24 @@ const styles =StyleSheet.create({
     },
     header_left:{
         width:w*.5,
-        flexDirection:'row'
+        flexDirection:'row',
+        marginLeft:w*.05
     },
     
     header_right:{
-        width:w*.5,
+        width:w*.4,
         flexDirection:'row',
         justifyContent:'flex-end'
 
     },
     home_text:{
-      marginLeft:w*.02,
+      marginLeft:w*.05,
         fontSize:20
     },
     home_icon:{
         width:w*.08,
-        height:w*.08
+        height:w*.08,
+        marginRight:10
     },
     banner:{
         width:w,
