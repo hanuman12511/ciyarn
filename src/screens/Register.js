@@ -40,14 +40,12 @@ if (success){
     setCPassword("")
 }
     function UserLogin(){
-            console.log("open login page");
-            console.log("name=",name);
+            
             console.log("email=",email);
             setEmail("")
-            setFName("")
-            setLName("")
+           
             setPassword("")
-            setCPassword("")
+            
                             
     }
 
