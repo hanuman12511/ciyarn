@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const W= Dimensions.get('window').width
 const H= Dimensions.get('window').height
-export default function Register(){
+export default function Register({navigation}){
 
     const[fname,setFName] = useState("")
     const[lname,setLName] = useState("")
@@ -31,7 +31,10 @@ console.log(res.data);
 const {message,success} = res.data
 if (success){
     alert(message)
-
+navigation.navigate('login')
+}
+else{
+    alert(message)
 }
     setEmail("")
     setFName("")
@@ -41,12 +44,7 @@ if (success){
 }
     function UserLogin(){
             
-            console.log("email=",email);
-            setEmail("")
-           
-            setPassword("")
-            
-                            
+        navigation.navigate('login')
     }
 
 

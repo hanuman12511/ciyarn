@@ -1,20 +1,27 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import {Text,View,StyleSheet,Dimensions,TextInput,TouchableOpacity} from 'react-native'
 const W= Dimensions.get('window').width
 const H= Dimensions.get('window').height
-export default function LoginScreen(){
+export default function LoginScreen({navigation}){
     const[email,setEmail]=useState("")
     const[password,setPassword]=useState("")
-    function login(){
-        console.log("login");
-        console.log(email);
-        console.log(password);
-
+    async function login(){
         const params= {
             "email":email,
             "pass":password
         }
         console.log(params);
+        
+        const res = await axios("http://ankursingh.xyz/api/Employeelogin.php",params)
+        const {message,success} = res.data
+        if (success){
+            alert(message)
+        navigation.navigate('home')
+        }
+        else{
+            alert(message)
+        } 
         setEmail("")
         setPassword("")
     }

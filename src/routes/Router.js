@@ -9,7 +9,8 @@ const Stack = createStackNavigator();
 export default function Router(){
     return(
         <NavigationContainer>
-                <Stack.Navigator>
+                <Stack.Navigator screenOptions={{headerShown:false}}>
+                    <Stack.Screen name="home" component={HomeScreen}/>
                     <Stack.Screen name="register" component={Register}/>
                     <Stack.Screen name="login" component={LoginScreen}/>
                 </Stack.Navigator>

@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Text,View,StyleSheet,Image,Dimensions} from 'react-native'
 import HeadderComponent from '../components/HeaderComponent'
 import ImageSliderComponent from '../components/ImageSliderComponent'
 const w =Dimensions.get('window').width;
 const h =Dimensions.get('window').height;
 import ProductComponent from '../components/ProductComponent';
+import axios from 'axios';
 export default function HomeScreen(){
+
+const [product,setProduct] = useState('')
+
+useEffect(()=>{
+    
+async function ProductShow(){
+
+const res = await axios("http://ankursingh.xyz/api/productshow.php")
+//const {body} = res.data
+console.log( res.data.body);
+setProduct(res.data.body)
+}
+    ProductShow()
+},[])
+
+
   function Header(){
         return <HeadderComponent/>
       }
@@ -14,7 +31,16 @@ function Slider() {
 }
 
 function ProductShow(){
-    return< ProductComponent/>
+    return<ProductComponent/>
+}
+
+function ProductShowData(product){
+    return<>
+    {product.map(d=>(
+        <Text>{d.product_name}</Text>
+    ))}
+    </>
+   
 }
  return(
         <>
@@ -29,11 +55,18 @@ function ProductShow(){
                 <Text style={styles.home_text_seeall}>
                     See All
                 </Text>
-            </View>
-            <View style={styles.product_List_show}>
+            </View> 
+           {/*  <View style={styles.product_List_show}>
                 {ProductShow()}
-            </View>
-           
+            </View> */}
+           <View>
+            {
+            product!==''?
+                       ProductShowData(product)
+            :<Text>Not Product</Text>
+            }
+
+           </View>
         </View>
         </>
     )
