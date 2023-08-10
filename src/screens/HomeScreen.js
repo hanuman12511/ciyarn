@@ -39,7 +39,7 @@ function ProductShowData(product){
     return<>
     {product.map(d=>(<>
         <View style={styles.product} >
-            <TouchableOpacity onPress={()=>navigation.navigate('details')}>
+            <TouchableOpacity onPress={()=>navigation.navigate('details',{...d})}>
                 <View style={styles.product1}>
                 <View style={styles.image}>
                     <Image source={{uri:d.image}} style={{width:'100%',height:'100%'}}/>
