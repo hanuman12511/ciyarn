@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import {Text,View,StyleSheet,Image,Dimensions} from 'react-native'
+import {Text,View,StyleSheet,Image,Dimensions, TouchableOpacity} from 'react-native'
 import HeadderComponent from '../components/HeaderComponent'
 import ImageSliderComponent from '../components/ImageSliderComponent'
 const w =Dimensions.get('window').width;
 const h =Dimensions.get('window').height;
 import ProductComponent from '../components/ProductComponent';
 import axios from 'axios';
-export default function HomeScreen(){
+import { ScrollView } from 'react-native-gesture-handler';
+export default function HomeScreen({navigation}){
 
 const [product,setProduct] = useState('')
 
@@ -36,8 +37,22 @@ function ProductShow(){
 
 function ProductShowData(product){
     return<>
-    {product.map(d=>(
-        <Text>{d.product_name}</Text>
+    {product.map(d=>(<>
+        <View style={styles.product} >
+            <TouchableOpacity onPress={()=>navigation.navigate('details')}>
+                <View style={styles.product1}>
+                <View style={styles.image}>
+                    <Image source={{uri:d.image}} style={{width:'100%',height:'100%'}}/>
+                </View>
+                <View style={styles.producttext}>
+                <Text>Product:{d.product_name}</Text>
+                <Text>Rs.{d.product_rate}/-</Text>
+                </View>
+            </View>
+        </TouchableOpacity>
+
+        </View>
+            </>
     ))}
     </>
    
@@ -60,13 +75,16 @@ function ProductShowData(product){
                 {ProductShow()}
             </View> */}
            <View>
+            <ScrollView style={styles}>
             {
             product!==''?
                        ProductShowData(product)
             :<Text>Not Product</Text>
             }
 
+            </ScrollView>
            </View>
+
         </View>
         </>
     )
@@ -93,7 +111,40 @@ const styles =StyleSheet.create({
         flexDirection:'row'
         
     },
-   
+    image:{
+        width:150,
+        height:"100%",
+        backgroundColor:'blue'
+    },
+    product:{
+        width:w,
+        height:200,
+        backgroundColor:'red',
+        justifyContent:'center',
+        alignItems:'center',
+       
+        
+        
+    },
+    product1:{
+        width:w*.95,
+        height:180,
+        backgroundColor:'white',
+        flexDirection:'row',
+        borderRadius:20,
+        overflow:'hidden'
+    },
+    scrollview:{
+        width:w,
+        height:h*.3,
+        backgroundColor:'green'
+    }
+   ,
+   producttext:{
+        flex:1,
+        height:'100%',
+        padding:15,
+        }
 
     
 

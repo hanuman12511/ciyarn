@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native'
 import HomeScreen from '../screens/HomeScreen'
 import Register from '../screens/Register'
 import LoginScreen from '../screens/LoginScreen'
+import Details from '../screens/Details';
 
 const Stack = createStackNavigator();
 export default function Router(){
@@ -11,6 +12,7 @@ export default function Router(){
         <NavigationContainer>
                 <Stack.Navigator screenOptions={{headerShown:false}}>
                     <Stack.Screen name="home" component={HomeScreen}/>
+                    <Stack.Screen name="details" component={Details}/>
                     <Stack.Screen name="register" component={Register}/>
                     <Stack.Screen name="login" component={LoginScreen}/>
                 </Stack.Navigator>
