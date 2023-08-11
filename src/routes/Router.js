@@ -5,6 +5,7 @@ import HomeScreen from '../screens/HomeScreen'
 import Register from '../screens/Register'
 import LoginScreen from '../screens/LoginScreen'
 import Details from '../screens/Details';
+import Addtocart from '../screens/Addtocart';
 
 const Stack = createStackNavigator();
 export default function Router(){
@@ -15,6 +16,7 @@ export default function Router(){
                     <Stack.Screen name="details" component={Details}/>
                     <Stack.Screen name="register" component={Register}/>
                     <Stack.Screen name="login" component={LoginScreen}/>
+                    <Stack.Screen name="addtocart" component={Addtocart}/>
                 </Stack.Navigator>
         </NavigationContainer>
         

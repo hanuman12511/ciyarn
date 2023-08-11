@@ -1,16 +1,56 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Text,View,Image,StyleSheet,Dimensions, TouchableOpacity} from 'react-native'
 import { create } from 'react-test-renderer';
 import add from '../images/icon/add.png'
 import sub from '../images/icon/sub.png'
+import cart from '../images/icon/cart.png'
 const w=Dimensions.get('window').width
 const h=Dimensions.get('window').height
-export default function Details({route}){
+export default function Details({route,navigation}){
 
     const [product,setProduct] = useState(route.params)
     const [qty,setQty] = useState(1)
-    
+    const [amount,setAmount] = useState(product.product_rate)
+    const [totalpay,setTotalpay] = useState('')
+
+    useEffect(()=>{
+        function Data(totalpay,qty){
+            setTotalpay(totalpay*qty)
+        }
+        Data(amount,qty)
+    },[amount,qty])
+
+  
+   function subqty(){
+   
+    var q =qty
+    if(q>1)
+    setQty(--q)
+   
+   }
+   function addqty(){
+   
+    var q =qty
+    if(q<10)
+    setQty(++q)
+
+   }
+   function addToCart(){
+    alert("add tocart")
+    const params = {
+        ...product,
+        "cartid":product.product_id,
+        "qty":qty,
+        "totalpay":totalpay,
+        "userId":1
+       
+    }
+    console.log(params);
+
+navigation.navigate("addtocart",params)
+   }
+    console.log(product);
     return(
        <>
        <View style={styles.container}>
@@ -31,14 +71,14 @@ export default function Details({route}){
                     <View style={styles.qtyview}>
                         <Text style={styles.qtytext}>Qty:</Text>
                         <View style={styles.qtychangeview}>
-                            <TouchableOpacity>
+                            <TouchableOpacity  onPress={subqty}>
                             <Image source={sub} style={styles.imageadd}/>
      
                             </TouchableOpacity>
                             
-                            <Text style={styles.qtytext}>{qty}</Text>
+                            <Text style={styles.qtytext1}>{qty}</Text>
                             
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={addqty}>
                             <Image source={add} style={styles.imageadd}/>
      
                         
@@ -47,7 +87,14 @@ export default function Details({route}){
                     </View>
                 </View>
                 <View style={styles.addtocart}>
-
+                    <Text style={styles.totalpay}> Rs.{totalpay}/-</Text>
+                   
+                    <TouchableOpacity style={styles.cartbtn} onPress={addToCart}>
+                    <View style={styles.cartview}>
+                    <Image source={cart} style={styles.cartimage}/>
+                    </View>
+                    </TouchableOpacity>
+                   
                 </View>
             </View>
             
@@ -108,7 +155,9 @@ const styles=StyleSheet.create({
         height:h*.1,
         backgroundColor:'#05C5EF',
         borderRadius:20,
-        marginTop:10
+        marginTop:10,
+        flexDirection:'row',
+        alignItems:'center'
     },
     footer:{
         flex:1,
@@ -135,13 +184,52 @@ const styles=StyleSheet.create({
     },
     qtychangeview:{
         flex:1,
-        flexDirection:'row'
+        flexDirection:'row',
+        marginRight:50
+
     },
     qtytext:{
-        flex:1,
+        flex:3,
+        fontSize:20,
+        textAlign:'left',
+        color:'#fff',
+        marginLeft:25
+       
+    },
+    qtytext1:{
         fontSize:20,
         textAlign:'center',
-        color:'#fff'
+        color:'#fff',
+        paddingHorizontal:10,
+        
+       
+    },
+
+    imageadd:{
+        width:30,
+        height:30
+    },
+    totalpay:{
+        padding:20,
+        fontSize:18,
+        color:'#fff',
+        flex:2
+    },
+    cartimage:{
+        width:30,
+        height:30,
+        marginRight:30
+    },
+    cartbtn:{
+        flex:1,
+    },
+    cartview:{
+        flex:1,
+        alignItems:'flex-end',
+        backgroundColor:'#fff',
+       
+        borderRadius:20,
+        justifyContent:'center',
        
     }
 })
