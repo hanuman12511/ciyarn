@@ -46,8 +46,12 @@ export default function Details({route,navigation}){
         "userId":1
        
     }
+
+    var cart = product.addcart 
+    cart.push(params)
+
     
-navigation.navigate("addtocart",params)
+navigation.navigate("addtocart",cart)
    }
     console.log(product);
     return(

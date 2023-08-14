@@ -1,33 +1,51 @@
 import React, { useState } from 'react'
-import {Text,View,Image,StyleSheet,Dimensions} from 'react-native'
+import {Text,View,Image,StyleSheet,Dimensions,ScrollView} from 'react-native'
 
 const w =Dimensions.get('screen').width
 const h =Dimensions.get('window').height
 import del from '../images/icon/delete.png'
+import HeadderComponent from '../components/HeaderComponent'
 export default function Addtocart({route}){
 
     const[product,setProduct] = useState(route.params)
     console.log(product);
+
+    function showCart(product){
+       return <View style={styles.cartView}>
+        <View style={styles.cartView_image}>
+            <Image source={{uri:product.image}}  style={{width:'100%',height:'100%'}}/>
+        </View>
+        
+        <View style={styles.cartView_text}>
+             <View style={styles.cartView_text1}>
+                <Text style={styles.product_name}>Product:{product.product_name}</Text>
+                <Text style={styles.product_rate}>Rs.:{product.product_rate}</Text>
+            </View>
+            <View style={styles.cartView_delete}>
+                <Text style={styles.product_qty}>Qty:{product.qty}</Text>
+               <Image source={del}  style={{width:40,height:40,marginRight:20}}/>
+     
+            </View>
+
+        </View>
+        </View>
+
+    }
     return(
         <>
         <View style={styles.container}>
-            <View style={styles.cartView}>
-            <View style={styles.cartView_image}>
-                <Image source={{uri:product.image}}  style={{width:'100%',height:'100%'}}/>
+            <HeadderComponent/>
+            <View style={styles.cartproduct}>
+                <ScrollView>
+            { product.map(pro=>(
+                showCart(pro)
+            ))
+           
+            }
+            </ScrollView>
             </View>
-            
-            <View style={styles.cartView_text}>
-                 <View style={styles.cartView_text1}>
-                    <Text style={styles.product_name}>Product:{product.product_name}</Text>
-                    <Text style={styles.product_rate}>Rs.:{product.product_rate}</Text>
-                </View>
-                <View style={styles.cartView_delete}>
-                    <Text style={styles.product_qty}>Qty:{product.qty}</Text>
-                   <Image source={del}  style={{width:40,height:40,marginRight:20}}/>
-         
-                </View>
+            <View style={styles.placeorder}>
 
-            </View>
             </View>
         </View>
         </>
@@ -47,7 +65,8 @@ const styles=StyleSheet.create({
         backgroundColor:'#fff',
         borderRadius:20,
         flexDirection:'row',
-        overflow:'hidden'
+        overflow:'hidden',
+        marginTop:10
      
     },
     cartView_image:{
@@ -86,5 +105,20 @@ const styles=StyleSheet.create({
     product_rate:{
         flex:1,
         marginLeft:20
+    },
+    placeorder:{
+        width:w,
+        height:h*.26,
+        backgroundColor:'#004C6C',
+        position:'absolute',
+        left:0,
+        bottom:0,
+        right:0
+    },
+    cartproduct:{
+        alignItems:'center',
+        width:w,
+        height:h*.6,
+        backgroundColor:'red'
     }
 })
