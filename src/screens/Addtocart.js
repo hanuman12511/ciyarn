@@ -31,6 +31,18 @@ export default function Addtocart({route}){
         </View>
 
     }
+
+    function PlaceOrder(){
+        return<>
+        <View style={styles.producttext}>
+
+        </View>
+        <View style={styles.productplace}>
+
+        </View>
+        </>
+    }
+
     return(
         <>
         <View style={styles.container}>
@@ -45,7 +57,7 @@ export default function Addtocart({route}){
             </ScrollView>
             </View>
             <View style={styles.placeorder}>
-
+                {PlaceOrder()}
             </View>
         </View>
         </>
@@ -109,16 +121,28 @@ const styles=StyleSheet.create({
     placeorder:{
         width:w,
         height:h*.26,
-        backgroundColor:'#004C6C',
+        backgroundColor:'#D6E5EB',
         position:'absolute',
         left:0,
         bottom:0,
-        right:0
+        right:0,
+        flexDirection:'row'
     },
     cartproduct:{
         alignItems:'center',
         width:w,
         height:h*.6,
-        backgroundColor:'red'
+        backgroundColor:'red',
+       
+    },
+    producttext:{
+        flex:1,
+        backgroundColor:'green'
+
+    },
+    productplace:{
+        flex:1,
+        backgroundColor:'pink'
+
     }
 })
