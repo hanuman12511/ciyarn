@@ -1,14 +1,31 @@
-import React, { useState } from 'react'
-import {Text,View,Image,StyleSheet,Dimensions,ScrollView} from 'react-native'
+import React, { useEffect, useState } from 'react'
+import {Text,View,Image,StyleSheet,Dimensions,ScrollView, TouchableOpacity} from 'react-native'
 
 const w =Dimensions.get('screen').width
 const h =Dimensions.get('window').height
 import del from '../images/icon/delete.png'
 import HeadderComponent from '../components/HeaderComponent'
-export default function Addtocart({route}){
+export default function Addtocart({route,navigation}){
 
     const[product,setProduct] = useState(route.params)
+    const[totalqty,setTotalqty] = useState(0)
+    const[totalpay,setTotalPay] = useState(0)
     console.log(product);
+
+useEffect(()=>{
+    var qty=0;
+    var pay=0
+    function showdata(){
+        product.map(d=>{
+            qty+=d.qty
+            pay+=d.qty*d.product_rate
+        })
+    }
+    showdata()
+    setTotalqty(qty)
+    setTotalPay(pay)
+
+},[])
 
     function showCart(product){
        return <View style={styles.cartView}>
@@ -31,14 +48,34 @@ export default function Addtocart({route}){
         </View>
 
     }
+    function placeorderpay(){
+        alert("place")
 
+        const params ={
+            "id":1,
+            "pay":totalpay,
+            "qty":totalqty
+        }
+        console.log(params);
+        navigation.navigate('addaddres')
+
+    }
     function PlaceOrder(){
         return<>
         <View style={styles.producttext}>
-
+            <View style={styles.productviewqty}>
+            <Text style={styles.productviewqtytext1}>Qty:</Text>
+            <Text style={styles.productviewqtytext2}>{totalqty}</Text>
+            </View>
+            <View style={styles.productviewrate}>
+            <Text style={styles.productviewqtytext1} >TotalPay:</Text>
+            <Text style={styles.productviewqtytext2} >Rs.{totalpay}/-</Text>
+            </View>
         </View>
         <View style={styles.productplace}>
-
+                <TouchableOpacity onPress={placeorderpay} style={styles.placeorderbtn}>
+                    <Text>PlaceOrder Now</Text>
+                </TouchableOpacity>
         </View>
         </>
     }
@@ -84,7 +121,6 @@ const styles=StyleSheet.create({
     cartView_image:{
         flex:1,
        
-        backgroundColor:'red'
     },
     cartView_text:{
         flex:2,
@@ -119,30 +155,63 @@ const styles=StyleSheet.create({
         marginLeft:20
     },
     placeorder:{
-        width:w,
+        
         height:h*.26,
         backgroundColor:'#D6E5EB',
         position:'absolute',
         left:0,
         bottom:0,
         right:0,
-        flexDirection:'row'
+        flexDirection:'row',
+        borderRadius:30,
+        overflow:'hidden',
+        marginVertical:30,
+        marginHorizontal:30
     },
     cartproduct:{
         alignItems:'center',
         width:w,
         height:h*.6,
         backgroundColor:'red',
+        borderBottomEndRadius:50,
+        borderBottomLeftRadius:50,
+
        
     },
     producttext:{
         flex:1,
-        backgroundColor:'green'
+        alignItems:'center',
+        justifyContent:'center'
 
     },
     productplace:{
         flex:1,
-        backgroundColor:'pink'
+        alignItems:'center',
+        justifyContent:'center',
 
+    },
+    productviewqty:{
+        flex:1,
+        marginTop:20
+
+    },
+    productviewqtytext1:{
+        color:"#02CFFB"
+    },
+    productviewqtytext2:{
+      color:'#fff',
+        padding:10,
+      width:100,
+        backgroundColor:'#02CFFB',
+        marginTop:5
+    },
+    productviewrate:{
+        flex:1
+    },
+    placeorderbtn:{
+        padding:10,
+        backgroundColor:'#fff',
+        borderRadius:15,
+        marginRight:10,
     }
 })
