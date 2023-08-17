@@ -1,13 +1,18 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Text,View,Image,StyleSheet,Dimensions, TouchableOpacity} from 'react-native'
 import { create } from 'react-test-renderer';
 import add from '../images/icon/add.png'
 import sub from '../images/icon/sub.png'
 import cart from '../images/icon/cart.png'
+import { ContextAuth } from '../context/Context';
 const w=Dimensions.get('window').width
 const h=Dimensions.get('window').height
 export default function Details({route,navigation}){
+    var addcart  = useContext(ContextAuth)
+    console.log("*****************");
+    console.log(addcart);
+    console.log("*****************");
 
     const [product,setProduct] = useState(route.params)
     const [qty,setQty] = useState(1)
@@ -49,7 +54,7 @@ export default function Details({route,navigation}){
 
     var cart = product.addcart 
     cart.push(params)
-
+    addcart.push(params)
     
 navigation.navigate("addtocart",cart)
    }

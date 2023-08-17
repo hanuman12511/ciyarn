@@ -49,7 +49,7 @@ function ProductShowData(product){
                 <Text>Product:{d.product_name}</Text>
                 <Text>Rs.{d.product_rate}/-</Text>
                 </View>
-            </View>
+                </View>
         </TouchableOpacity>
 
         </View>
@@ -75,7 +75,7 @@ function ProductShowData(product){
            {/*  <View style={styles.product_List_show}>
                 {ProductShow()}
             </View> */}
-           <View>
+           <View style={styles.container1}>
             <ScrollView style={styles}>
             {
             product!==''?
@@ -91,6 +91,10 @@ function ProductShowData(product){
     )
 }
 const styles =StyleSheet.create({
+    container1:{
+        height:h*.5,
+        backgroundColor:'green'
+    },
     container:{
         flex:1,
         backgroundColor:"yellow"
@@ -120,7 +124,6 @@ const styles =StyleSheet.create({
     product:{
         width:w,
         height:200,
-        backgroundColor:'red',
         justifyContent:'center',
         alignItems:'center',
        

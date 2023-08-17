@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Text,View,Image,StyleSheet,Dimensions,ScrollView, TouchableOpacity} from 'react-native'
 
 const w =Dimensions.get('screen').width
 const h =Dimensions.get('window').height
 import del from '../images/icon/delete.png'
 import HeadderComponent from '../components/HeaderComponent'
+import { ContextAuth } from '../context/Context'
 export default function Addtocart({route,navigation}){
 
+    
+    const addcart  = useContext(ContextAuth)
+    console.log("*****************");
+    console.log(addcart);
+    console.log("*****************");
     const[product,setProduct] = useState(route.params)
     const[totalqty,setTotalqty] = useState(0)
     const[totalpay,setTotalPay] = useState(0)
@@ -41,9 +47,7 @@ useEffect(()=>{
             <View style={styles.cartView_delete}>
                 <Text style={styles.product_qty}>Qty:{product.qty}</Text>
                <Image source={del}  style={{width:40,height:40,marginRight:20}}/>
-     
             </View>
-
         </View>
         </View>
 
@@ -52,12 +56,13 @@ useEffect(()=>{
         alert("place")
 
         const params ={
-            "id":1,
+            ...product,
+            "orderid":1,
             "pay":totalpay,
             "qty":totalqty
         }
         console.log(params);
-        navigation.navigate('addaddres')
+        navigation.navigate('addres',{state:params})
 
     }
     function PlaceOrder(){

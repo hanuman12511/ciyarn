@@ -4,3 +4,5 @@ export const product=[
     {id:3,name:"product3",image:require('../images/food/food3.png')},
 
 ]
+
+export const Addtocart=[]
