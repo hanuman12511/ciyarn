@@ -6,7 +6,7 @@ const h =Dimensions.get('window').height
 
 export default function Addres({route,navigation}){
 
-    const defaultadd = "sp 21 laxmi nagar,near 200ft road, jaipur, raj. 302038"
+    const defaultadd = "Not Addres"
     console.log("address=",route.params.state);
 const [add,setAdd] = useState(null)
 

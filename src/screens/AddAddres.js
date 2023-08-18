@@ -2,18 +2,21 @@ import React, { useState } from 'react'
 import {Text,View,StyleSheet,TouchableOpacity,TextInput,Dimensions} from 'react-native'
 const w= Dimensions.get('screen').width
 const h= Dimensions.get('screen').height
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 export default function AddAddres(props){
     const[addres,setAddres] = useState('')
+    const[addresdetails,setAddresDetails] = useState([])
 
 
 function addaddresdata(){
-    alert(addres)
-    console.log(props.route.params)
     const {addaddres} =props.route.params
-    addaddres(addres)
-    console.log(props.navigation);
+    const{data,details} =addresdetails
+    addaddres(data.description)
     props.navigation.goBack()
 }
+
+
     return(
         <>
         <View style={styles.container}>
@@ -23,7 +26,27 @@ function addaddresdata(){
             </View>
             
             <View style={styles.viewinput}>
-                <TextInput  value={addres} onChangeText={d=>setAddres(d)} style={styles.inputaddres}  placeholder='enter addres'/>
+                  <GooglePlacesAutocomplete
+                placeholder='Search'
+                fetchDetails={true}
+                onPress={(data, details = null) => {
+                    console.log(data, details);
+                    setAddresDetails({data,details})
+                    }}
+            query={{
+                key: 'AIzaSyBb3j8Aiv60CadZ_wJS_5wg2KBO6081a_k',
+                language: 'en',
+            }}
+          
+           /*  query={{
+                key: 'AIzaSyBb3j8Aiv60CadZ_wJS_5wg2KBO6081a_k',
+                language: 'hi',
+                components: 'country:Ind',
+                fields: 'geometry',
+              }} */
+           
+           
+    />
             </View>
             
             <View style={styles.viewbtn}>
@@ -55,7 +78,7 @@ const styles=StyleSheet.create({
     },
     viewinput:{
         marginTop:10,
-       height:h*.2,
+       height:h*.3,
         justifyContent:'center',
         marginHorizontal:10
     },

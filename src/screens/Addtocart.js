@@ -13,9 +13,11 @@ export default function Addtocart({route,navigation}){
     console.log("*****************");
     console.log(addcart);
     console.log("*****************");
-    const[product,setProduct] = useState(route.params)
+    //const[product,setProduct] = useState(route.params)
+    const[product,setProduct] = useState(addcart)
     const[totalqty,setTotalqty] = useState(0)
     const[totalpay,setTotalPay] = useState(0)
+    const[id,setIndexDelete] = useState(-1)
     console.log(product);
 
 useEffect(()=>{
@@ -32,8 +34,24 @@ useEffect(()=>{
     setTotalPay(pay)
 
 },[])
+useEffect(()=>{
+    function show(id){
+    if (id > -1) {
+        addcart.splice(id, 1); 
+      }
+   console.log(addcart);
+    }
+      show(id)
+      setProduct(addcart)
+},[id])
 
-    function showCart(product){
+
+function deleteItem(id){
+    alert(`delete${id}`)
+   setIndexDelete(id)
+}
+
+    function showCart(product,index){
        return <View style={styles.cartView}>
         <View style={styles.cartView_image}>
             <Image source={{uri:product.image}}  style={{width:'100%',height:'100%'}}/>
@@ -46,14 +64,16 @@ useEffect(()=>{
             </View>
             <View style={styles.cartView_delete}>
                 <Text style={styles.product_qty}>Qty:{product.qty}</Text>
-               <Image source={del}  style={{width:40,height:40,marginRight:20}}/>
+                <TouchableOpacity onPress={()=>deleteItem(index)}>
+               <Image source={del}   style={{width:40,height:40,marginRight:20}}/>
+               </TouchableOpacity>
             </View>
         </View>
         </View>
 
     }
     function placeorderpay(){
-        alert("place")
+       
 
         const params ={
             ...product,
@@ -91,8 +111,8 @@ useEffect(()=>{
             <HeadderComponent/>
             <View style={styles.cartproduct}>
                 <ScrollView>
-            { product.map(pro=>(
-                showCart(pro)
+            { product.map((pro,index)=>(
+                showCart(pro,index)
             ))
            
             }
