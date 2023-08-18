@@ -5,10 +5,8 @@ const h= Dimensions.get('screen').height
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 export default function AddAddres(props){
-    const[addres,setAddres] = useState('')
     const[addresdetails,setAddresDetails] = useState([])
-
-
+    
 function addaddresdata(){
     const {addaddres} =props.route.params
     const{data,details} =addresdetails
