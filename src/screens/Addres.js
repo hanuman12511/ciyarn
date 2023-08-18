@@ -1,15 +1,27 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Text ,Image,View,StyleSheet,Dimensions,TouchableOpacity} from 'react-native'
 const w =Dimensions.get('window').width
 const h =Dimensions.get('window').height
 
 export default function Addres({route,navigation}){
+
+    const defaultadd = "sp 21 laxmi nagar,near 200ft road, jaipur, raj. 302038"
     console.log("address=",route.params.state);
+const [add,setAdd] = useState(null)
+
+function addresUpdate(data){
+    setAdd(data)
+    console.log(data);
+} 
+
 
     function addaddres(){
         alert("add Addres")
-        navigation.navigate('addaddres')
+        const params={
+            addaddres:addresUpdate
+        }
+        navigation.push('addaddres',params)
     }
 
     return(
@@ -19,7 +31,7 @@ export default function Addres({route,navigation}){
        </View>
         <View style={styles.container}>
             <View style={styles.addresview}>
-                <Text style={styles.addrestext}>sp 21 laxmi nagar,near 200ft road, jaipur, raj. 302038</Text>
+                <Text style={styles.addrestext}>{add!=null?add:defaultadd}</Text>
                 <TouchableOpacity onPress={addaddres} style={styles.addadresbtn}>
                 <Text  style={styles.addaddrestext}>Add Addres</Text>
                 </TouchableOpacity>
