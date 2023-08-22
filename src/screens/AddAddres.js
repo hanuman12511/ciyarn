@@ -6,6 +6,11 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import Geolocation from '@react-native-community/geolocation';
 
 export default function AddAddres(props){
+
+console.log("***********************");
+  console.log(props);
+  
+console.log("***********************");
     const[addresdetails,setAddresDetails] = useState([])
     const [
         currentLongitude,
