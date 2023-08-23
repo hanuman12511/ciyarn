@@ -7,6 +7,7 @@ const h =Dimensions.get('window').height;
 import ProductComponent from '../components/ProductComponent';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+import {productitem} from '../Data/data'
 export default function HomeScreen({navigation}){
 
 const [product,setProduct] = useState('')
@@ -19,7 +20,7 @@ async function ProductShow(){
 const res = await axios("http://ankursingh.xyz/api/productshow.php")
 //const {body} = res.data
 console.log( res.data.body);
-setProduct(res.data.body)
+setProduct(productitem)
 }
     ProductShow()
 },[])

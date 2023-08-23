@@ -9,6 +9,7 @@ export default function Addres({route,navigation}){
     const defaultadd = "Not Addres"
     console.log("address=",route.params.state);
 const [add,setAdd] = useState(null)
+const [pay,setPay] = useState(100)
 
 function addresUpdate(data){
     setAdd(data)
@@ -23,7 +24,15 @@ function addresUpdate(data){
         }
         navigation.push('addaddres',params)
     }
-
+function paymentsend(){
+    
+    const params = {
+        addres:add,
+        payment:pay
+    }
+console.log(params);
+    navigation.navigate("payment",params)
+}
     return(
        <>
        <View style={styles.header}>
@@ -41,7 +50,7 @@ function addresUpdate(data){
            </View>
            <View style={styles.paymentview}>
            <Text style={styles.addrestext}>Total Pay</Text>
-                <TouchableOpacity onPress={addaddres} style={styles.addadresbtn}>
+                <TouchableOpacity onPress={paymentsend} style={styles.addadresbtn}>
                 <Text  style={styles.addaddrestext}>Payment Now</Text>
                 </TouchableOpacity>
 

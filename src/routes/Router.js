@@ -8,6 +8,7 @@ import Details from '../screens/Details';
 import Addtocart from '../screens/Addtocart';
 import Addres from '../screens/Addres';
 import AddAddres from '../screens/AddAddres';
+import Payment from '../screens/Payment';
 
 const Stack = createStackNavigator();
 export default function Router(){
@@ -21,6 +22,7 @@ export default function Router(){
                     <Stack.Screen name="addtocart" component={Addtocart}/>
                     <Stack.Screen name="addres" component={Addres}/>
                     <Stack.Screen name="addaddres" component={AddAddres}/>
+                    <Stack.Screen name="payment" component={Payment}/>
                 </Stack.Navigator>
         </NavigationContainer>
         

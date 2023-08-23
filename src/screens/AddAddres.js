@@ -127,6 +127,7 @@ console.log("***********************");
 
 function addaddresdata(){
     const {addaddres} =props.route.params
+    
     const{data,details} =addresdetails
     addaddres(data.description)
     props.navigation.goBack()
