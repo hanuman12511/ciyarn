@@ -116,7 +116,7 @@ const styles =StyleSheet.create({
     },
     container:{
         flex:1,
-        backgroundColor:"yellow"
+       
     },
     home_product_text:{
         width:w*.5,
