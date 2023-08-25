@@ -6,6 +6,7 @@ const h =Dimensions.get('window').height
 import del from '../images/icon/delete.png'
 import HeadderComponent from '../components/HeaderComponent'
 import { ContextAuth } from '../context/Context'
+import BackHeaderComponent from '../components/BackHeaderComponent'
 export default function Addtocart({route,navigation}){
 
     
@@ -108,7 +109,7 @@ function deleteItem(id){
     return(
         <>
         <View style={styles.container}>
-            <HeadderComponent/>
+            <BackHeaderComponent title="Cart Screen"/>
             <View style={styles.cartproduct}>
                 <ScrollView>
             { product.map((pro,index)=>(

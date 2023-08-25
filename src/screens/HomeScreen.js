@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Text,View,StyleSheet,Image,Dimensions, TouchableOpacity} from 'react-native'
+import {Text,View,StyleSheet,Image,Dimensions, Button,TouchableOpacity} from 'react-native'
 import HeadderComponent from '../components/HeaderComponent'
 import ImageSliderComponent from '../components/ImageSliderComponent'
 const w =Dimensions.get('window').width;
@@ -8,6 +8,10 @@ import ProductComponent from '../components/ProductComponent';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import {productitem} from '../Data/data'
+
+import cart from '../images/icon/cart.png'
+
+
 export default function HomeScreen({navigation}){
 
 const [product,setProduct] = useState('')
@@ -25,9 +29,17 @@ setProduct(productitem)
     ProductShow()
 },[])
 
-
+function cartfunc1(){
+    alert("cart func")
+}
   function Header(){
-        return <HeadderComponent/>
+        const data11={
+            cartbtn:cartshow,
+            nav:navigation.navigate,
+            title:"Home Screen"
+        }
+        return <HeadderComponent  {...data11}/>
+       
       }
 function Slider() {
     return <ImageSliderComponent/>
@@ -59,12 +71,18 @@ function ProductShowData(product){
     </>
    
 }
+
+function cartshow(){
+    navigation.navigate('addtocart')
+}
+
  return(
         <>
         <View style={styles.container}>
-            {Header()}
+            
+            {Header()} 
+            
             {Slider()}
-          
             <View style={styles.product_List}>
                 <Text style={styles.home_product_text}>
                     Product

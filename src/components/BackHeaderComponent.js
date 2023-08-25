@@ -6,14 +6,8 @@ import notification from '../images/icon/notification.png'
 const w =Dimensions.get('window').width;
 const h =Dimensions.get('window').height;
 
-export default function HeadderComponent(props){
+export default function BackHeaderComponent(props){
 
- function cartfunc(){
-   
-    const{cartbtn,nav}=props
-    cartbtn()
-    
- }
     return(
         <View style={styles.header}>
         <View style={styles.header_left}>
@@ -22,15 +16,8 @@ export default function HeadderComponent(props){
                {props.title}
              </Text>
         </View>
-        <View style={styles.header_right}>
-        <TouchableOpacity 
-        onPress={()=>alert("cart func")}>
-        <Image source={notification} style={styles.home_icon}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={cartfunc}>
-        <Image source={cart} style={styles.home_icon}/>
-        </TouchableOpacity>
-        </View>    
+       
+          
     </View>
     )
 }
