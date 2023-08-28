@@ -9,6 +9,7 @@ import Addtocart from '../screens/Addtocart';
 import Addres from '../screens/Addres';
 import AddAddres from '../screens/AddAddres';
 import Payment from '../screens/Payment';
+import OrderConfirm from '../screens/OrderConfirm';
 
 const Stack = createStackNavigator();
 export default function Router(){
@@ -23,6 +24,7 @@ export default function Router(){
                     <Stack.Screen name="addres" component={Addres}/>
                     <Stack.Screen name="addaddres" component={AddAddres}/>
                     <Stack.Screen name="payment" component={Payment}/>
+                    <Stack.Screen name="orderconfirm" component={OrderConfirm}/>
                 </Stack.Navigator>
         </NavigationContainer>
         

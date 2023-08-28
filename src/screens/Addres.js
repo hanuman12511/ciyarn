@@ -7,7 +7,7 @@ const h =Dimensions.get('window').height
 export default function Addres({route,navigation}){
 
     const defaultadd = "Not Addres"
-    console.log("address=",route.params.state);
+    console.log("address=",route.params.state[0]);
 const [add,setAdd] = useState(null)
 const [pay,setPay] = useState(100)
 
