@@ -3,32 +3,43 @@ import {Text,View,StyleSheet,Image,Dimensions,TouchableOpacity} from 'react-nati
 import home from "../images/icon/home.png"
 import cart from '../images/icon/cart.png'
 import notification from '../images/icon/notification.png'
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 const w =Dimensions.get('window').width;
 const h =Dimensions.get('window').height;
 
 export default function HeadderComponent(props){
-
+    const{
+        cartbtn,
+        nav,
+        home,
+    title,
+    cart,
+    notification}=props
  function cartfunc(){
    
-    const{cartbtn,nav}=props
+    
     cartbtn()
     
  }
     return(
         <View style={styles.header}>
         <View style={styles.header_left}>
-            <Image source={props.iconl} style={styles.home_icon}/>
+        {/*     <Image source={props.iconl} style={styles.home_icon}/> */}
+        <Icon name={home} size={30} color="#900" />
             <Text style={styles.home_text}>
-               {props.title}
+               {title}
              </Text>
         </View>
         <View style={styles.header_right}>
         <TouchableOpacity 
         onPress={()=>alert("cart func")}>
-        <Image source={notification} style={styles.home_icon}/>
+      {/*   <Image source={notification} style={styles.home_icon}/> */}
+      <Icon name={notification} size={30} color="#900" style={styles.home_icon} />
         </TouchableOpacity>
         <TouchableOpacity onPress={cartfunc}>
-        <Image source={cart} style={styles.home_icon}/>
+       {/*  <Image source={cart} style={styles.home_icon}/> */}
+       <Icon name={cart} size={30} color="#900" />
         </TouchableOpacity>
         </View>    
     </View>

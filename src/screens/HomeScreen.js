@@ -8,7 +8,6 @@ import ProductComponent from '../components/ProductComponent';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import {productitem} from '../Data/data'
-
 import cart from '../images/icon/cart.png'
 import { ContextAuth } from '../context/Context';
 
@@ -40,7 +39,10 @@ function cartfunc1(){
         const data11={
             cartbtn:cartshow,
             nav:navigation.navigate,
-            title:"Home Screen"
+            home:"bars",
+            title:"Home Screen",
+            cart:"shopping-cart",
+            notification:"bell-o"
         }
         return <HeadderComponent  {...data11}/>
        
@@ -83,7 +85,7 @@ function cartshow(){
  return(
         <>
         <View style={styles.container}>
-            
+      
             {Header()} 
             
             {Slider()}
