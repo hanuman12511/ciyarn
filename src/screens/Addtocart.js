@@ -10,12 +10,10 @@ import BackHeaderComponent from '../components/BackHeaderComponent'
 export default function Addtocart({route,navigation}){
 
     
-    const addcart  = useContext(ContextAuth)
-    console.log("*****************");
-    console.log(addcart);
-    console.log("*****************");
+    const data  = useContext(ContextAuth)
+    const {Addtocart} = data
     //const[product,setProduct] = useState(route.params)
-    const[product,setProduct] = useState(addcart)
+    const[product,setProduct] = useState(Addtocart)
     const[totalqty,setTotalqty] = useState(0)
     const[totalpay,setTotalPay] = useState(0)
     const[id,setIndexDelete] = useState(-1)
@@ -38,12 +36,16 @@ useEffect(()=>{
 useEffect(()=>{
     function show(id){
     if (id > -1) {
-        addcart.splice(id, 1); 
+        Addtocart.splice(id, 1); 
       }
-   console.log(addcart);
+   console.log(Addtocart);
+   setInterval(()=>{
+    setProduct(Addtocart)
+   
+   },1000)
     }
       show(id)
-      setProduct(addcart)
+     
 },[id])
 
 

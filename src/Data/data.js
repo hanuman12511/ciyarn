@@ -42,3 +42,4 @@ export const productitem=[
 ]
 
 export const Addtocart=[]
+export const orderdata=[]
