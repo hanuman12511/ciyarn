@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
-import {Text,View,StyleSheet,Image,Dimensions, Button,TouchableOpacity} from 'react-native'
+import React, { useContext, useEffect, useState,BackHandler } from 'react'
+import {Text,View,StyleSheet,Image,Dimensions, ActivityIndicator,Button,TouchableOpacity,FlatList} from 'react-native'
 import HeadderComponent from '../components/HeaderComponent'
 import ImageSliderComponent from '../components/ImageSliderComponent'
 const w =Dimensions.get('window').width;
 const h =Dimensions.get('window').height;
 import ProductComponent from '../components/ProductComponent';
 import axios from 'axios';
+/* import LottieView from 'lottie-react-native'; */
 import { ScrollView } from 'react-native-gesture-handler';
 import {productitem} from '../Data/data'
 import cart from '../images/icon/cart.png'
@@ -16,9 +17,12 @@ export default function HomeScreen({navigation}){
 
 const [product,setProduct] = useState('')
 const [addcart,setAddcart] = useState([])
+const [isLoaded,setLoaded] = useState(false)
+const [isproductid,setProductId] = useState(0)
 const data = useContext(ContextAuth)
 
 useEffect(()=>{
+    
     const {productitem } = data
     
 async function ProductShow(){
@@ -27,11 +31,14 @@ async function ProductShow(){
 //const {body} = res.data
 //console.log( res.data.body);
 
-setProduct(productitem)
+
 }
     ProductShow()
-},[])
 
+console.log("****");   
+
+
+},[])
 function cartfunc1(){
     alert("cart func")
 }
@@ -55,9 +62,57 @@ function ProductShow(){
     return<ProductComponent/>
 }
 
+async function detailsPage(item){
+    
+        setProductId(item.product_id) 
+        setLoaded(!isLoaded)
+        setTimeout(()=>{
+             navigation.navigate('details',{...item,addcart})
+        
+        },1000)
+          
+}
+
+
+
+function renderitempage(item){
+
+return<>  
+
+
+<View style={styles.itemflat}>
+     { isLoaded && item.product_id===isproductid? 
+    <View style={styles.loadingview}>
+    <ActivityIndicator size="large" color="#00ff00" />
+    </View>
+:
+    <View style={styles.itemflat1}>
+        <TouchableOpacity onPress={()=>detailsPage(item)}>
+            <View style={styles.imageview}>
+                <Image source={{uri:item.image}} style={{width:'100%',height:'100%'}}/>
+            </View>
+            <View style={styles.textview}>
+            <Text>{item.product_name}</Text>
+            </View>
+
+        </TouchableOpacity>
+    </View>
+}
+</View>
+</>
+}
 function ProductShowData(product){
     return<>
-    {product.map(d=>(<>
+
+    <FlatList
+    numColumns={3}
+    data={product}
+    renderItem={({item})=>renderitempage(item)}
+    keyExtractor={(item)=>item.key}
+    />
+
+
+    {/* product.map(d=>(<>
         <View style={styles.product} >
             <TouchableOpacity onPress={()=>navigation.navigate('details',{...d,addcart})}>
                 <View style={styles.product1}>
@@ -73,7 +128,7 @@ function ProductShowData(product){
 
         </View>
             </>
-    ))}
+    )) */}
     </>
    
 }
@@ -85,7 +140,7 @@ function cartshow(){
  return(
         <>
         <View style={styles.container}>
-      
+       
             {Header()} 
             
             {Slider()}
@@ -173,7 +228,49 @@ const styles =StyleSheet.create({
         flex:1,
         height:'100%',
         padding:15,
+        },
+        itemflat:{
+            
+            height:h*.2,
+            flex:1,
+            backgroundColor:'yellow',
+            margin:10,
+          overflow:'hidden',
+            borderTopLeftRadius:20,
+            borderTopRightRadius:20,
+            alignItems:'center',
+            justifyContent:'center'
+
+
+        },
+        imageview:{
+            flex:1,
+            height:h*.15,
+            borderRadius:20,
+            overflow:'hidden'
+            
+        },
+        textview:{
+            flex:1,
+            padding:10
+        },
+        loadingview:{
+            flex:1,
+            zIndex:100,
+            position:'absolute' , 
+            },
+        itemflat1:{
+            height:h*.2,
+            flex:1,
+            backgroundColor:'yellow',
+            margin:10,
+          overflow:'hidden',
+            borderTopLeftRadius:20,
+            borderTopRightRadius:20,
+            alignItems:'center',
+            justifyContent:'center'
         }
+
 
     
 
